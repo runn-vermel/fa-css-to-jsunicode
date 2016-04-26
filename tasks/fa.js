@@ -25,42 +25,68 @@ module.exports = function(grunt) {
 
       var filepath = f.src,
           css = grunt.file.read(filepath),
-          regex;
+          regex,
+          fileHeader,
+          fileFooter,
+          retrunedArr;
 
-      // \n\r\s\scontent:\s"\\f([a-zA-Z0-9]{3})"
+      fileHeader = "<script>\n\
+        /*\n\
+        Name:\n\
+        faCodes\n\
+        Description:\n\
+        Polymer behavior that provides the a json object matching font-awesome classes with unicode values.\n\
+        This allows access to the fa class definitions in javascript for applications where CSS is not ideal.\n\
+        Dependencies:\n\
+        - none\n\
+        @polymerBehavior faCodes\n\
+        */\n\
+        var faCodes = {\n\
+          properties: {\n\
+            /**\n\
+            * fa\n\
+            * Defines unicode values for font-awesome classes.\n\
+            *\n\
+            * Format: Object\n\
+            */\n\
+            fa:{\n\
+              type:Object,\n\
+              value:";
+
+      fileFooter = "\n}\n}\n};\n</script>";
+
+      // TODO we could make this an option
       regex = new RegExp(/\.fa-([^:]+):before\s+{\n\s{2}content:\s"\\f([a-zA-Z0-9]{3})"/g);
 
-      var myArr;
-      while ((myArr = regex.exec(css)) !== null) {
-        var name = 'fa-' + myArr[1];
-        var code = 'uf' + myArr[2];
+      while ((retrunedArr = regex.exec(css)) !== null) {
+        // TODO we could make the prefixes options
+        var name = 'fa-' + retrunedArr[1];
+        var code = 'uf' + retrunedArr[2];
         codes[name] = code;
-        grunt.log.writeln(codes[name]);
+        // grunt.log.writeln(codes[name]);
       }
 
-      // codes = regex.exec(css);
-      grunt.log.writeln(codes);
-
       // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
+      // var src = f.src.filter(function(filepath) {
+      //   // Warn on and remove invalid source files (if nonull was set).
+      //   if (!grunt.file.exists(filepath)) {
+      //     grunt.log.warn('Source file "' + filepath + '" not found.');
+      //     return false;
+      //   } else {
+      //     return true;
+      //   }
+      // }).map(function(filepath) {
+      //   // Read file source.
+      //   return grunt.file.read(filepath);
+      //
+      // }).join(grunt.util.normalizelf(options.separator));
+      //
+      // // Handle options.
+      // src += options.punctuation;
 
-      }).join(grunt.util.normalizelf(options.separator));
-
-      // Handle options.
-      src += options.punctuation;
-
+      var compiled = fileHeader + JSON.stringify(codes, null, 2) + fileFooter;
       // Write the destination file.
-      grunt.file.write(f.dest, JSON.stringify(codes, null, 2));
+      grunt.file.write(f.dest, compiled);
 
       // Print a success message.
       grunt.log.writeln('File "' + f.dest + '" created.');

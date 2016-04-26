@@ -1,4 +1,25 @@
-{
+<script>
+        /*
+        Name:
+        faCodes
+        Description:
+        Polymer behavior that provides the a json object matching font-awesome classes with unicode values.
+        This allows access to the fa class definitions in javascript for applications where CSS is not ideal.
+        Dependencies:
+        - none
+        @polymerBehavior faCodes
+        */
+        var faCodes = {
+          properties: {
+            /**
+            * fa
+            * Defines unicode values for font-awesome classes.
+            *
+            * Format: Object
+            */
+            fa:{
+              type:Object,
+              value:{
   "fa-glass": "uf000",
   "fa-music": "uf001",
   "fa-search": "uf002",
@@ -627,4 +648,7 @@
   "fa-snapchat": "uf2ab",
   "fa-snapchat-ghost": "uf2ac",
   "fa-snapchat-square": "uf2ad"
+}}
 }
+};
+<script>

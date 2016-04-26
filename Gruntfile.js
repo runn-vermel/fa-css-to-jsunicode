@@ -18,7 +18,7 @@ module.exports = function(grunt) {
         options: {
         },
         files: {
-          'fa_fixed.js': ['fa.css']
+          'fa_fixed.html': ['fa.css']
         }
       }
     }
