@@ -61,7 +61,7 @@ module.exports = function(grunt) {
       while ((retrunedArr = regex.exec(css)) !== null) {
         // TODO we could make the prefixes options
         var name = 'fa-' + retrunedArr[1];
-        var code = 'uf' + retrunedArr[2];
+        var code = 'f' + retrunedArr[2];
         codes[name] = code;
         // grunt.log.writeln(codes[name]);
       }
