@@ -1,0 +1,38 @@
+{
+  "name": "grunt-fa",
+  "description": "A plugin which converts the FA css unicode from CSS to JS.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/212476604/grunt_fa",
+  "author": {
+    "name": "Vermel, Runn (GE Global Research)",
+    "email": "runn.vermel@ge.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/212476604/grunt_fa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/212476604/grunt_fa/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/212476604/grunt_fa/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
